@@ -1,0 +1,79 @@
+<!-- Created by LuMa-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="myDraw2">
+  <title>myDraw2</title>
+</head>
+<body>
+  <canvas id="myCanvas" height="400"  width="400" style="border:1px solid"></canvas>
+  
+  <script>
+  var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var width = canvas.width;
+var height = canvas.height;
+
+//random color
+function rgbaColor(){
+  var red = Math.floor(Math.random() *  256);
+  var green = Math.floor(Math.random() *  256);
+  var blue = Math.floor(Math.random() *  256);
+  var alpha = 0.9;
+  return  "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+}
+
+
+
+function drawRect(x, y){
+// how many px translate 
+//x coordinate + width/2
+let a = width/2;
+// y coordinata + height/2
+let b = height/2;
+//draw rectangle
+  ctx.beginPath();
+  //translate the matrix's origin to the shape's center.
+  
+  ctx.translate(a, b); 
+  // rotate 
+  ctx.rotate(5*Math.PI / 180);
+  //translate back the starting point
+  ctx.translate(-a, -b);
+  ctx.rect(width/2-x/2, height/2-x/2, x, y);
+  ctx.strokeStyle = rgbaColor();
+  ctx.stroke();
+  
+  }
+
+var i = width/2;
+var j = height/2;
+var k = 0;
+setInterval (() => {
+if (k < height/2) {
+    k += 3;
+    i -= 3;
+    j -= 3;
+    } else if(k >= width/2 && k < width/2+3){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        k += 3;
+        i += 3;
+        j += 3;
+        } else if (k >= width/2+3 && k < width){
+        k += 3;
+        i += 3;
+        j += 3;
+    } else {
+    k = 0;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+  drawRect(i, j);},200);
+
+
+
+</script>
+</body>
+</html>
