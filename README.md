@@ -5,3 +5,4 @@
 - Javascript
 
 ## Live version
+https://lukacsma.github.io/rotate-squares/
